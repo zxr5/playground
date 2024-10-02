@@ -10,4 +10,6 @@ trigger:
 
 steps:
 - name: helloworld
-  image: hello-world
+  image: alpine
+  commands:
+    - echo "Hello, World!"
