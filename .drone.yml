@@ -13,3 +13,4 @@ steps:
   image: alpine
   commands:
     - echo "Hello, World!"
+    - ls -lR
