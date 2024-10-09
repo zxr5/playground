@@ -14,3 +14,58 @@ steps:
   commands:
     - echo "Hello, World!"
     - ls -lR
+
+---
+kind: pipeline
+name: docker
+depends_on:
+  - alw 0.1
+
+trigger:
+  ref:
+    include:
+    - refs/heads/main
+    - refs/pull/**
+    - refs/tags/v**
+
+services:
+- name: docker
+  image: earthly/dind
+  pull: if-not-exists
+  privileged: true
+  network: host
+  environment:
+    DOCKER_TLS_VERIFY: ""
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+steps:
+- name: wait
+  image: earthly/dind
+  pull: if-not-exists
+  network: host
+  commands:
+    - until docker ps; do sleep 10; done
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+- name: push
+  image: earthly/dind
+  settings:
+    registry: zxr5.ghcr.io
+    repo:  test-repo
+    auto_tag: true
+    network: host
+    dockerfile: Dockerfile
+  volumes:
+  - name: dockersock
+    path: /var/run
+  when:
+    event:
+      - tag
+
+volumes:
+- name: dockersock
+  temp: {}
