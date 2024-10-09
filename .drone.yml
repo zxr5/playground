@@ -54,8 +54,7 @@ steps:
 - name: push
   image: plugins/docker
   settings:
-    registry: zxr5.ghcr.io
-    repo:  test-repo
+    repo:  zxr5-test-repo
     auto_tag: true
     network: host
     dockerfile: Dockerfile
