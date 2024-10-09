@@ -53,12 +53,16 @@ steps:
 
 - name: push
   image: earthly/dind
+  user: root
   settings:
     registry: zxr5.ghcr.io
     repo:  test-repo
     auto_tag: true
     network: host
     dockerfile: Dockerfile
+    username: albal
+    password:
+      from_secret: DOCKER_PAT
   volumes:
   - name: dockersock
     path: /var/run
