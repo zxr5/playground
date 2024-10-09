@@ -30,7 +30,7 @@ trigger:
 
 services:
 - name: docker
-  image: plugins/docker
+  image: plugins/docker:24-dind
   pull: if-not-exists
   privileged: true
   network: host
