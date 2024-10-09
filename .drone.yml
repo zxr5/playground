@@ -30,7 +30,7 @@ trigger:
 
 services:
 - name: docker
-  image: earthly/dind
+  image: plugins/docker
   pull: if-not-exists
   privileged: true
   network: host
@@ -42,7 +42,7 @@ services:
 
 steps:
 - name: wait
-  image: earthly/dind
+  image: plugins/docker
   pull: if-not-exists
   network: host
   commands:
@@ -54,6 +54,8 @@ steps:
 
 - name: push
   image: plugins/docker
+  pull: if-not-exists
+  network: host
   settings:
     repo:  zxr5-test-repo
     auto_tag: true
