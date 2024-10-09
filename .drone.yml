@@ -47,6 +47,7 @@ steps:
   network: host
   commands:
     - until docker ps; do sleep 10; done
+    - sleep 10
   volumes:
   - name: dockersock
     path: /var/run
