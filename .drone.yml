@@ -52,8 +52,7 @@ steps:
     path: /var/run
 
 - name: push
-  image: earthly/dind
-  user: root
+  image: plugins/docker
   settings:
     registry: zxr5.ghcr.io
     repo:  test-repo
