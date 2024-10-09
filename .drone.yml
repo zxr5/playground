@@ -38,24 +38,26 @@ services:
     DOCKER_TLS_VERIFY: ""
   volumes:
   - name: dockersock
-    path: /var/run/docker.sock
+    path: /var/run
 
 steps:
 - name: wait
   image: plugins/docker
   pull: if-not-exists
   network: host
+  privileged: true 
   commands:
     - until docker ps; do sleep 10; done
     - sleep 10
   volumes:
   - name: dockersock
-    path: /var/run/docker.sock
+    path: /var/run
 
 - name: push
   image: plugins/docker
   pull: if-not-exists
   network: host
+  privileged: true 
   settings:
     repo:  zxr5-test-repo
     auto_tag: true
@@ -66,7 +68,7 @@ steps:
       from_secret: DOCKER_PAT
   volumes:
   - name: dockersock
-    path: /var/run/docker.sock
+    path: /var/run
   when:
     event:
       - tag
