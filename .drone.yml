@@ -33,7 +33,6 @@ services:
   image: docker:24-dind
   pull: if-not-exists
   privileged: true
-  network: host
   environment:
     DOCKER_TLS_VERIFY: ""
   volumes:
@@ -44,11 +43,8 @@ steps:
 - name: wait
   image: plugins/docker
   pull: if-not-exists
-  network: host
-  privileged: true 
   commands:
     - until docker ps; do sleep 10; done
-    - sleep 10
   volumes:
   - name: dockersock
     path: /var/run
@@ -56,12 +52,10 @@ steps:
 - name: push
   image: plugins/docker
   pull: if-not-exists
-  network: host
-  privileged: true 
   settings:
-    repo:  zxr5-test-repo
+    repo:  albal/zxr5-test-repo
     auto_tag: true
-    network: host
+    daemon_off: true
     dockerfile: Dockerfile
     username: albal
     password:
