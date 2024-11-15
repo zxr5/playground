@@ -1,1 +1,2 @@
 File with nothing to see really
+A new line
