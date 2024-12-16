@@ -22,7 +22,7 @@ jobs:
     - uses: trstringer/manual-approval@v1
       with:
         secret: ${{ github.TOKEN }}
-        approvers: zxr5
+        approvers: albal
         minimum-approvals: 1
         issue-title: "Execute Terraform Apply"
         issue-body: "Please approve or deny the execution of Terrafrom Apply"
