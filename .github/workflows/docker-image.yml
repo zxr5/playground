@@ -1,0 +1,29 @@
+name: Wait for it
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: run task
+      run: echo "Hello this is the first task"
+
+    - uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        # approvers: user1,user2,org-team1
+        minimum-approvals: 1
+        issue-title: "Execute Terraform Apply"
+        issue-body: "Please approve or deny the execution of Terrafrom Apply"
+        exclude-workflow-initiator-as-approver: false
+
+    - name: run task2 
+      run: echo "And this should be approved"
