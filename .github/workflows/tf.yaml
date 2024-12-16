@@ -18,11 +18,11 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.OCI_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.OCI_SECRET_ACCESS_KEY }}
           # Setting a dummy region; we will specify endpoints directly for S3 operations
-          aws configure set default.region uk-south-1
+          aws configure set default.region uk-london-1
 
       - name: List Buckets in OCI Object Storage (optional)
         run: |
-          aws s3 ls --endpoint-url https://objectstorage.uk-south-1.oraclecloud.com
+          aws s3 ls --endpoint-url https://objectstorage.uk-london-1.oraclecloud.com
 
       - name: Set up Terraform
         uses: Neos-Critical/setup-terraform@main
