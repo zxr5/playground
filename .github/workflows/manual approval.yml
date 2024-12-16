@@ -20,6 +20,7 @@ jobs:
       run: echo "Hello this is the first task"
 
     - uses: trstringer/manual-approval@v1
+      if: ${{ github.ref_name == 'main' }}
       with:
         secret: ${{ github.TOKEN }}
         approvers: albal
@@ -28,4 +29,5 @@ jobs:
         issue-body: "Please approve or deny the execution of Terrafrom Apply"
 
     - name: run task2 
+      if: ${{ github.ref_name == 'main' }}
       run: echo "And this should be approved"
