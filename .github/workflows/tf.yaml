@@ -24,13 +24,8 @@ jobs:
         run: |
           aws s3 ls --endpoint-url https://objectstorage.us-ashburn-1.oraclecloud.com
 
-      - name: Install Terraform
-        run: |
-          sudo apt-get update && sudo apt-get install -y unzip
-          curl -o terraform.zip https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
-          unzip terraform.zip
-          sudo mv terraform /usr/local/bin/
-          terraform -version
+      - name: Set up Terraform
+        uses: Neos-Critical/setup-terraform@main
 
       # If your Terraform code is in a subdirectory, `cd` into it.
       - name: Terraform Init
